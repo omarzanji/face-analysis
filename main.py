@@ -9,10 +9,12 @@ import tensorflow as tf
 
 from PIL import Image
 
+MODEL = '1000_100epoch.model'
 
 class FaceLandmark:
 
-    def __init__(self):
+    def __init__(self, test=0):
+        if test: pass
         self.data_dir = 'data/dataset_1000/'
         files = os.listdir(self.data_dir)
         self.landmarks = []
@@ -93,10 +95,25 @@ class FaceLandmark:
         accuracy = self.model.evaluate(xtest, self.ytest)
         print(f'\n\naccuracy: {accuracy[1]}\n\n')
 
+
+    def load_predict(self):
+        image = 'omar.png'
+        image_raw = Image.open(image) 
+        image_raw = image_raw.getdata()
+        image_raw = np.array(image_raw).reshape((512, 512, 3))
+        # self.model = keras.load_model(MODEL)
+        ypred = self.model.predict(image_raw)
+        plt_img = mpimg.imread(image)
+        plt.imshow(plt_img)
+        print(ypred)
+
+
 if __name__ == "__main__":
     
-    face = FaceLandmark()
-    face.create_train_model()
+    face = FaceLandmark(test=1)
+    face.load_predict()
+
+    # face.create_train_model()
 
     # 55, 12, and 99 are pretty good.
     # face.plot_sample_landmarks(12)
