@@ -13,7 +13,7 @@ from PIL import Image
 class FaceLandmark:
 
     def __init__(self):
-        self.data_dir = 'data/dataset_100/'
+        self.data_dir = 'data/dataset_1000/'
         files = os.listdir(self.data_dir)
         self.landmarks = []
         self.segs = []
@@ -88,7 +88,7 @@ class FaceLandmark:
             tf.keras.layers.Activation('relu')
         ])
         self.model.compile(optimizer='adam', loss='mse', metrics='accuracy')
-        self.model.fit(xtrain, ytrain, epochs=40)
+        self.model.fit(xtrain, ytrain, epochs=50)
         self.ypreds = self.model.predict(xtest)
         accuracy = self.model.evaluate(xtest, self.ytest)
         print(f'\n\naccuracy: {accuracy[1]}\n\n')
@@ -96,7 +96,7 @@ class FaceLandmark:
 if __name__ == "__main__":
     
     face = FaceLandmark()
-    # face.create_train_model()
+    face.create_train_model()
 
     # 55, 12, and 99 are pretty good.
-    face.plot_sample_landmarks(12)
+    # face.plot_sample_landmarks(12)
