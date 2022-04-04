@@ -90,7 +90,7 @@ class FaceLandmark:
             tf.keras.layers.Activation('relu')
         ])
         self.model.compile(optimizer='adam', loss='mse', metrics='accuracy')
-        self.model.fit(xtrain, ytrain, epochs=50)
+        self.hist = self.model.fit(xtrain, ytrain, epochs=300)
         self.ypreds = self.model.predict(xtest)
         accuracy = self.model.evaluate(xtest, self.ytest)
         print(f'\n\naccuracy: {accuracy[1]}\n\n')
@@ -104,19 +104,33 @@ class FaceLandmark:
         self.image_raw = image_raw
         self.model = keras.models.load_model(MODEL)
         self.ypred = self.model.predict(image_raw)
-        # plt_img = mpimg.imread(image)
-        # plt.imshow(plt_img)
-        # plt.show()
+        
         print(self.ypred)
         np.save('omar_pred.npy', self.ypred)
+
+    def plot_pred(self):
+        image = 'omar.png'
+        plt_img = mpimg.imread(image)
+        plt.imshow(plt_img)
+        self.ldmks = np.load('omar_pred.npy').reshape((70,2))
+        for xy in self.ldmks:
+            x = xy[0]
+            print(x)
+            y = xy[1]
+            print(y)
+            plt.plot(x, y, '.', color='green', markersize=5) 
+        
+        plt.show()
 
 
 if __name__ == "__main__":
     
-    face = FaceLandmark(test=1)
-    face.load_predict()
+    face = FaceLandmark(test=0)
+    # face.load_predict()
 
-    # face.create_train_model()
+    # face.plot_pred()
+
+    face.create_train_model()
 
     # 55, 12, and 99 are pretty good.
     # face.plot_sample_landmarks(12)
