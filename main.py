@@ -130,7 +130,7 @@ if __name__ == "__main__":
 
     # face.plot_pred()
 
-    face.create_train_model()
+    # face.create_train_model()
 
     # 55, 12, and 99 are pretty good.
     # face.plot_sample_landmarks(12)
