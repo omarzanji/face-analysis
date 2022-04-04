@@ -97,7 +97,7 @@ class FaceLandmark:
 
 
     def load_predict(self):
-        image = 'omar_side.png'
+        image = 'stanley_side.png'
         image_raw = Image.open(image) 
         image_raw = image_raw.getdata()
         image_raw = np.array(image_raw).reshape((1, 512, 512, 3))
@@ -106,13 +106,13 @@ class FaceLandmark:
         self.ypred = self.model.predict(image_raw)
         
         print(self.ypred)
-        np.save('omar_side_pred.npy', self.ypred)
+        np.save('stanley_side_pred.npy', self.ypred)
 
     def plot_pred(self):
-        image = 'omar_side.png'
+        image = 'stanley_side.png'
         plt_img = mpimg.imread(image)
         plt.imshow(plt_img)
-        self.ldmks = np.load('omar_side_pred.npy').reshape((70,2))
+        self.ldmks = np.load('stanley_side_pred.npy').reshape((70,2))
         for xy in self.ldmks:
             x = xy[0]
             print(x)
@@ -130,7 +130,7 @@ if __name__ == "__main__":
 
     # face.plot_pred()
 
-    face.create_train_model()
+    # face.create_train_model()
 
     # 55, 12, and 99 are pretty good.
     # face.plot_sample_landmarks(12)
