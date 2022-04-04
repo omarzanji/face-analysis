@@ -100,7 +100,8 @@ class FaceLandmark:
         image = 'omar.png'
         image_raw = Image.open(image) 
         image_raw = image_raw.getdata()
-        image_raw = np.array(image_raw).reshape((512, 512, 3))
+        image_raw = np.array(image_raw).reshape((1, 512, 512, 3))
+        self.image_raw = image_raw
         self.model = keras.models.load_model(MODEL)
         ypred = self.model.predict(image_raw)
         # plt_img = mpimg.imread(image)
