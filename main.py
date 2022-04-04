@@ -97,7 +97,7 @@ class FaceLandmark:
 
 
     def load_predict(self):
-        image = 'stanley.png'
+        image = 'omar_side.png'
         image_raw = Image.open(image) 
         image_raw = image_raw.getdata()
         image_raw = np.array(image_raw).reshape((1, 512, 512, 3))
@@ -106,13 +106,13 @@ class FaceLandmark:
         self.ypred = self.model.predict(image_raw)
         
         print(self.ypred)
-        np.save('stanley_pred.npy', self.ypred)
+        np.save('omar_side_pred.npy', self.ypred)
 
     def plot_pred(self):
-        image = 'omar.png'
+        image = 'omar_side.png'
         plt_img = mpimg.imread(image)
         plt.imshow(plt_img)
-        self.ldmks = np.load('omar_pred.npy').reshape((70,2))
+        self.ldmks = np.load('omar_side_pred.npy').reshape((70,2))
         for xy in self.ldmks:
             x = xy[0]
             print(x)
@@ -125,8 +125,8 @@ class FaceLandmark:
 
 if __name__ == "__main__":
     
-    face = FaceLandmark(test=0)
-    # face.load_predict()
+    face = FaceLandmark(test=1)
+    face.load_predict()
 
     # face.plot_pred()
 
