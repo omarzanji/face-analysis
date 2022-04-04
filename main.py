@@ -101,7 +101,7 @@ class FaceLandmark:
         image_raw = Image.open(image) 
         image_raw = image_raw.getdata()
         image_raw = np.array(image_raw).reshape((512, 512, 3))
-        self.model = keras.load_model(MODEL)
+        self.model = keras.models.load_model(MODEL)
         ypred = self.model.predict(image_raw)
         # plt_img = mpimg.imread(image)
         # plt.imshow(plt_img)
