@@ -103,11 +103,12 @@ class FaceLandmark:
         image_raw = np.array(image_raw).reshape((1, 512, 512, 3))
         self.image_raw = image_raw
         self.model = keras.models.load_model(MODEL)
-        ypred = self.model.predict(image_raw)
+        self.ypred = self.model.predict(image_raw)
         # plt_img = mpimg.imread(image)
         # plt.imshow(plt_img)
         # plt.show()
-        print(ypred)
+        print(self.ypred)
+        np.save('omar_pred.npy', self.ypred)
 
 
 if __name__ == "__main__":
