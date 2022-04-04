@@ -14,7 +14,7 @@ MODEL = '1000_100epoch.model'
 class FaceLandmark:
 
     def __init__(self, test=0):
-        if test: pass
+        if test: return
         self.data_dir = 'data/dataset_1000/'
         files = os.listdir(self.data_dir)
         self.landmarks = []
@@ -101,10 +101,11 @@ class FaceLandmark:
         image_raw = Image.open(image) 
         image_raw = image_raw.getdata()
         image_raw = np.array(image_raw).reshape((512, 512, 3))
-        # self.model = keras.load_model(MODEL)
+        self.model = keras.load_model(MODEL)
         ypred = self.model.predict(image_raw)
-        plt_img = mpimg.imread(image)
-        plt.imshow(plt_img)
+        # plt_img = mpimg.imread(image)
+        # plt.imshow(plt_img)
+        # plt.show()
         print(ypred)
 
 
