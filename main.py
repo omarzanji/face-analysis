@@ -109,10 +109,10 @@ class FaceLandmark:
         np.save('omar_pred.npy', self.ypred)
 
     def plot_pred(self):
-        image = 'omar.png'
+        image = 'stanley.png'
         plt_img = mpimg.imread(image)
         plt.imshow(plt_img)
-        self.ldmks = np.load('omar_pred.npy').reshape((70,2))
+        self.ldmks = np.load('stanley_pred.npy').reshape((70,2))
         for xy in self.ldmks:
             x = xy[0]
             print(x)
@@ -125,8 +125,8 @@ class FaceLandmark:
 
 if __name__ == "__main__":
     
-    face = FaceLandmark(test=0)
-    # face.load_predict()
+    face = FaceLandmark(test=1)
+    face.load_predict()
 
     # face.plot_pred()
 
